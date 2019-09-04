@@ -1,9 +1,14 @@
 import React from 'react'
+import myData from '../resources/questions.json';
 
 class Question extends React.Component {
 
     state = {
-        answer: ''
+        questionId: 1,
+        questions: myData,
+        answers: {},
+        currentAnswer: '',
+        score: ''
     }
 
     changeState(id) {
@@ -13,16 +18,15 @@ class Question extends React.Component {
     }
 
     onChange = (e) => {
-        this.setState({answer: e.target.value})
+        this.setState({currentAnswer: e.target.value})
     }
 
     onSubmit = (e) => {
         e.preventDefault();
-        this.props.onSubmit();
     }
 
     submitButton() {
-        if(this.props.questionId === Object.keys(this.props.questions).length) {
+        if(this.state.questionId === Object.keys(this.state.questions).length) {
             return(
                 <input type="submit" name="Submit"></input>
             )
@@ -30,7 +34,7 @@ class Question extends React.Component {
     }
 
     previousButton() {
-      if(this.props.questionId !== 1) {
+      if(this.state.questionId !== 1) {
         return(
           <React.Fragment>
             <button onClick={this._prev}>Previous</button>
@@ -40,7 +44,7 @@ class Question extends React.Component {
     }
   
     nextButton() {
-      if(this.props.questionId < Object.keys(this.props.questions).length) {
+      if(this.state.questionId < Object.keys(this.props.questions).length) {
         return(
           <React.Fragment>
             <button onClick={this._next}>Next</button>
@@ -50,13 +54,15 @@ class Question extends React.Component {
     }
   
     _prev = () => {
-        const id = this.props.questionId
-        this.props.prev(id, this.state.answer)
+        const id = this.state.questionId - 1
+        this.setState({questionId: id})
+        // this.props.prev(id, this.state.answer)
     }
 
     _next = () => {
-        const id = this.props.questionId
-        this.props.next(id, this.state.answer)
+        const id = this.state.questionId + 1
+        this.setState({questionId: id})
+        // this.props.next(id, this.state.answer)
     }
 
     calFootprint() {
@@ -64,9 +70,9 @@ class Question extends React.Component {
             return(
                 <React.Fragment>
                     <form onSubmit={this.onSubmit}> 
-                        <h3>{this.props.questions[this.props.questionId]}</h3>
+                        <h3>{this.state.questions[this.state.questionId].question}</h3>
                         <p>Answer: <input type="text" 
-                        value={this.state.answer}
+                        value={this.state.currentAnswer}
                         onChange={this.onChange}/></p>
 
                         {this.previousButton()}
