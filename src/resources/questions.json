@@ -1,20 +1,42 @@
 {
+    "Food": {
         "1": {
             "question": "How would you best describe your diet?",
             "options": {
-                "1": "Meat in every meal",
-                "2": "Meat in some meals",
-                "3": "Meat very rarely",
-                "4": "No Beef"
+                "1": { "option": "Meat in every meal", "score": 10},
+                "2": { "option": "Meat in some meals", "score": 20},
+                "3": { "option": "Meat very rarely", "score": 30},
+                "4": { "option": "No Beef", "score": 40}
             }
         },
         "2": {
             "question": "In a week, how much do you spend on food from restaurants, canteens and takeaways?",
             "options": {
-                "1": "Rs 0-500",
-                "2": "Rs 500-2000",
-                "3": "Rs 2000-5000",
-                "4": "More than Rs 5000"
+                "1": { "option": "Rs 0-500", "score": 1},
+                "2": { "option": "Rs 500-2000", "score": 2},
+                "3": { "option": "Rs 2000-5000", "score": 3},
+                "4": { "option": "More than Rs 5000", "score": 4}
             }
         }
+    },
+    "Transport": {
+        "1": {
+            "question": "How would you best describe your diet?",
+            "options": {
+                "1": { "option": "Meat in every meal", "score": 1},
+                "2": { "option": "Meat in some meals", "score": 2},
+                "3": { "option": "Meat very rarely", "score": 3},
+                "4": { "option": "No Beef", "score": 4}
+            }
+        },
+        "2": {
+            "question": "In a week, how much do you spend on food from restaurants, canteens and takeaways?",
+            "options": {
+                "1": { "option": "Rs 0-500", "score": 1},
+                "2": { "option": "Rs 500-2000", "score": 2},
+                "3": { "option": "Rs 2000-5000", "score": 3},
+                "4": { "option": "More than Rs 5000", "score": 4}
+            }
+        }
+    }
 }

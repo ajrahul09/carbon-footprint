@@ -1,56 +1,67 @@
 import React from 'react';
-import Question from './form/Question'
+import Questionnaire from './form/Questionnaire'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import './App.css';
+import myData from './resources/questions.json';
 
 class App extends React.Component {
 
   constructor(props) {
     super(props);
-    this.questionElement = React.createRef();
+    const categoryId = Object.keys(myData)[0];
+    const questionId = parseInt(Object.keys(myData[categoryId])[0])
+    
+    this.state = {
+      startQuestionnaire: false,
+      endQuestionnaire: false,
+      categoryId: categoryId,
+      questionId: questionId,
+      answers: {},
+      score: 0
+    }
   }
 
-  state = {
-    footprint: false,
-    questionId: 1,
-    questions: {
-      '1': 'What is your commute distance?',
-      '2': 'Do you take a shared cab or drive?'
-    },
-    answers: {}
-  }
-
-  onSubmit = (e) => {
-    console.log('Hey from app.js');
+  onSubmit = (val) => {
     this.setState({
-      footprint: true,
-      questionId: this.state.questionId,
-      questions: this.state.questions,
-      answers: this.state.answers
+      score: val,
+      endQuestionnaire: true,
     })
   }
 
-  onClick = (id, answer) => {
-    this.setState({questionId: this.state.questionId,
-      questions: this.state.questions,
-      answers: {[id]: answer}
-    })
+  setAnswer = (val) => {
+    this.setState({answers: val})
   }
 
-  prev = (id, answer) => {
-    this.setState({questionId: this.state.questionId - 1,
-      questions: this.state.questions,
-      answers: {...this.state.answers, [id]: answer}
-    })
-    this.questionElement.current.changeState(id - 1)
+  setCategoryQuestion = (categoryId, questionId) => {
+    this.setState({categoryId: categoryId, questionId: questionId})
   }
 
-  next = (id, answer) => {
-    this.setState({questionId: this.state.questionId + 1,
-      questions: this.state.questions,
-      answers: {...this.state.answers, [id]: answer}
-    })
-    this.questionElement.current.changeState(id + 1)
+  setStartQuestionnaire = (val) => {
+    this.setState({startQuestionnaire: val})
+  }
+
+  questionnaire() {
+    if(!this.state.endQuestionnaire) {
+    return (
+      <Questionnaire ref={this.questionElement}
+          categoryId={this.state.categoryId}
+          questionId={this.state.questionId} 
+          answers={this.state.answers}
+          setAnswer={this.setAnswer}
+          setCategoryQuestion={this.setCategoryQuestion}
+          setStartQuestionnaire={this.setStartQuestionnaire}
+          footprint={this.state.footprint}
+          onSubmit={this.onSubmit}/>
+      )
+    }
+  }
+
+  printScore() {
+    if(this.state.endQuestionnaire) {
+      return (
+        <div>{this.state.score}</div>
+      )
+    }
   }
 
   render() {
@@ -59,7 +70,8 @@ class App extends React.Component {
         <React.Fragment>
           <h1>Carbon Footprint</h1>
 
-          <Link to="/about">About</Link> | <Link to="/footprint">Footprint</Link>
+          <Link to="/about">About</Link> | 
+          <Link to="/footprint">{this.state.startQuestionnaire === false ? 'Start Questionnaire' : 'Resume Questionnaire'}</Link>
           
           <Route exact path="/about" render={props => (
             <React.Fragment>
@@ -69,17 +81,11 @@ class App extends React.Component {
 
           <Route exact path="/footprint" render={props => (
             <React.Fragment>
-              <Question ref={this.questionElement}
-                questionId={this.state.questionId} 
-                questions={this.state.questions}
-                answers={this.state.answers}
-                footprint={this.state.footprint}
-                onClick={this.onClick} 
-                next={this.next}
-                prev={this.prev}
-                onSubmit={this.onSubmit}/>
-              </React.Fragment>
+              {this.questionnaire()}  
+            </React.Fragment>
           )} />
+
+          {this.printScore()}
 
         </React.Fragment>
       </Router>
