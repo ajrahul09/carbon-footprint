@@ -1,0 +1,21 @@
+.questionSpace {
+    max-width: 400px;
+    widows: 100%;
+    margin: 0 auto;
+}
+
+.questionForm {
+    margin-top: 140px;
+}
+
+.questionHeading { 
+    position: relative;
+    top: 23px;
+    right: 20px;
+    float: right;
+    display: inline-block;
+}
+.footprintHeader {
+    font-size: 20px;
+    color: #f1a036;
+}

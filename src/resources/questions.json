@@ -3,39 +3,40 @@
         "1": {
             "question": "How would you best describe your diet?",
             "options": {
-                "1": { "option": "Meat in every meal", "score": 10},
-                "2": { "option": "Meat in some meals", "score": 20},
-                "3": { "option": "Meat very rarely", "score": 30},
-                "4": { "option": "No Beef", "score": 40}
+                "1": { "option": "Meat in every meal", "score": 15},
+                "2": { "option": "Meat in some meals", "score": 10},
+                "3": { "option": "Meat very rarely", "score": 8},
+                "4": { "option": "No Beef", "score": 12},
+                "5": { "option": "Vegetarian", "score": 4},
+                "6": { "option": "Vegan", "score": 2}
             }
         },
         "2": {
             "question": "In a week, how much do you spend on food from restaurants, canteens and takeaways?",
             "options": {
-                "1": { "option": "Rs 0-500", "score": 1},
-                "2": { "option": "Rs 500-2000", "score": 2},
-                "3": { "option": "Rs 2000-5000", "score": 3},
-                "4": { "option": "More than Rs 5000", "score": 4}
+                "1": { "option": "Rs 0-500", "score": 3},
+                "2": { "option": "Rs 500-2000", "score": 8},
+                "3": { "option": "Rs 2000-5000", "score": 16},
+                "4": { "option": "More than Rs 5000", "score": 25}
             }
         }
     },
     "Transport": {
         "1": {
-            "question": "How would you best describe your diet?",
+            "question": "What kind of vehicle do you travel in most often as driver or passenger? (if any)",
             "options": {
-                "1": { "option": "Meat in every meal", "score": 1},
-                "2": { "option": "Meat in some meals", "score": 2},
-                "3": { "option": "Meat very rarely", "score": 3},
-                "4": { "option": "No Beef", "score": 4}
+                "1": { "option": "Car", "score": 40},
+                "2": { "option": "Motorbike", "score": 15},
+                "3": { "option": "Neither - I walk, cycle or use public transport", "score": 20}
             }
         },
         "2": {
-            "question": "In a week, how much do you spend on food from restaurants, canteens and takeaways?",
+            "question": "Which of these best describes the vehicle you use most?",
             "options": {
-                "1": { "option": "Rs 0-500", "score": 1},
-                "2": { "option": "Rs 500-2000", "score": 2},
-                "3": { "option": "Rs 2000-5000", "score": 3},
-                "4": { "option": "More than Rs 5000", "score": 4}
+                "1": { "option": "Electric car", "score": 10},
+                "2": { "option": "Small petrol or diesel car", "score": 15},
+                "3": { "option": "Medium petrol or diesel car", "score": 18},
+                "4": { "option": "Large petrol or diesel car", "score": 25}
             }
         }
     }

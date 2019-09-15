@@ -1,0 +1,13 @@
+.questionTitle {
+    font-size: 40px;
+    padding: 30px 0;
+}
+.questionOptionDiv {
+    padding: 8px 0;
+}
+.questionOption {
+    font-size: 25px;
+}
+.questionDiv {
+    margin-bottom: 35px;
+}

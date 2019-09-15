@@ -1,6 +1,7 @@
 import React from 'react';
 import Question from './Question'
 import myData from '../resources/questions.json';
+import './Questionnaire.css'
 
 class Questionnaire extends React.Component {
 
@@ -41,6 +42,7 @@ class Questionnaire extends React.Component {
     onSubmit = (e) => {
         e.preventDefault();
         this.props.onSubmit(this.state.score);
+        this.props.history.push('/results');
     }
 
     submitButton() {
@@ -48,7 +50,8 @@ class Questionnaire extends React.Component {
       var lastQuestion = parseInt(Object.keys(myData[lastCategory])[Object.keys(myData[lastCategory]).length - 1]);
         if(lastCategory === this.state.categoryId && lastQuestion === this.state.questionId) {
             return(
-                <input type="submit" name="Submit"></input>
+                // <input className="submitButton" type="submit" name="Submit"></input>
+                <button type="button" onClick={this.onSubmit.bind(this)}>Submit</button>
             )
         }
     }
@@ -122,7 +125,6 @@ class Questionnaire extends React.Component {
 
     currVal() {
       const ans = this.state.answers;
-      console.log(ans);
       if(ans[this.state.categoryId] !== undefined && ans[this.state.categoryId][this.state.questionId] !== undefined) {
         return ans[this.state.categoryId][this.state.questionId]
       } else {
@@ -131,17 +133,27 @@ class Questionnaire extends React.Component {
     }
 
     calFootprint() {
+      if(this.props.endQuestionnaire === false) {
+          this.props.history.push('/');
+      }
         if(!this.props.footprint) {
           const [categoryId, questionId] = [this.state.categoryId, this.state.questionId];
             return(
+
+              <React.Fragment>
+
                 <React.Fragment>
-                    <form onSubmit={this.onSubmit}> 
+                  <div className="questionHeading">
+                    <div className="footprintHeader">Footprint Calculator</div>
+                    <div>{categoryId}: Question. {this.state.questionId}/{parseInt(Object.keys(myData[categoryId])[Object.keys(myData[categoryId]).length - 1])}</div>
+                  </div>
+                </React.Fragment>
 
-                      <div>
+                <React.Fragment>
+                  <div className="questionSpace">
+                      <form className="questionForm"> 
 
-                            <h2>{categoryId}</h2>
-                            <h4>Q. {this.state.questionId}/{parseInt(Object.keys(myData[categoryId])[Object.keys(myData[categoryId]).length - 1])}</h4>
-
+                        <div>
                             <React.Fragment key={categoryId}>
                               <Question
                                 questionObj={myData[categoryId][questionId]}
@@ -152,21 +164,22 @@ class Questionnaire extends React.Component {
                               {this.nextButton(categoryId)}
                               {this.submitButton()}
                             </React.Fragment>
-                      </div>
+                        </div>
 
-                        
-                        {this.state.score}
-                    </form>
+                      </form>
+                  </div>
                 </React.Fragment>
+
+              </React.Fragment>
             )
         }
     }
 
     render() {
         return (
-            <div>
+            <React.Fragment>
                 {this.calFootprint()}
-            </div>
+            </React.Fragment>
         )
     }
 }

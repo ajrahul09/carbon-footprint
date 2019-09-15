@@ -1,0 +1,17 @@
+.pieChart {
+    height: 300px;
+}
+text {
+    fill: white !important;
+}
+.resultDiv {
+    text-align: center;
+    font-size: 25px;
+}
+.resultCat {
+    color: #f1a036;
+}
+.resultTitle {
+    text-align: center;
+    font-size: 35px;
+}

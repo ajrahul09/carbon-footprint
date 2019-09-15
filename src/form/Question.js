@@ -1,5 +1,6 @@
 import React from 'react'
 import myData from '../resources/questions.json';
+import './Question.css'
 
 class Question extends React.Component {
     
@@ -16,15 +17,15 @@ class Question extends React.Component {
         const thisObj = this;
         const questionObj = this.props.questionObj;
         return (
-            <React.Fragment>
-                <h3>{questionObj.question}</h3>
+            <div className="questionDiv">
+                <div className="questionTitle">{questionObj.question}</div>
                 {Object.keys(questionObj.options).map(key => (
-                    <div key={key}>
+                    <div className="questionOptionDiv" key={key}>
                         <input type="radio" value={key} onChange={thisObj.onChange} name={"question"} checked={key === this.props.val} />{' '}
-                        <span>{questionObj.options[key].option}</span> 
+                        <span className="questionOption">{questionObj.options[key].option}</span> 
                     </div>
                 ))}
-            </React.Fragment>
+            </div>
         )
     }
 }
