@@ -1,13 +1,21 @@
-import React, { Component } from 'react'
+import React, {useState, useEffect} from 'react'
 import PieChart from 'react-minimal-pie-chart';
 import './Result.css'
 import myData from '../resources/questions.json';
 
-export class Result extends Component {
+const Result = props => {
+
+    const [pieChartData, setPieChartData] = useState([]);
     
-    pieChartData() {
+    const preparePieChartData = () => {
+        console.log('a');
         var arr = [];
-        var ans = this.props.answers;
+        var ans = props.answers;
+        if(ans && Object.keys(ans).length <= 0) {
+            if(props.endQuestionnaire === false) {
+                props.history.push('/');
+            }
+        }
         Object.keys(ans).map(function(key) {
             var score = 0;
             Object.keys(ans[key]).map(function(key1) {
@@ -20,40 +28,38 @@ export class Result extends Component {
             }
             arr.push(obj);
         });
-        return arr;
-    }
+        setPieChartData(arr);
+    };
+
+    useEffect(() => {
+        preparePieChartData();
+    }, [])
     
-    render() {
-        if(this.props.endQuestionnaire === false) {
-            this.props.history.push('/');
-        }
-        var pieChartData = this.pieChartData();
-        return (
-            <div>
-                <div className="resultTitle">Results</div>
-                <PieChart className="pieChart"
-                    data={ pieChartData }
-                    animate
-                    lengthAngle={-360}
-                    label={({ data, dataIndex }) =>
-                        Math.round(data[dataIndex].percentage) + '%'
-                    }
-                    radius={42}
-                    labelPosition={112}
-                    labelStyle={{
-                      fontSize: '5px',
-                      fontFamily: 'sans-serif',
-                      fill: '#121212'
-                    }}
-                />
-                <div className="resultDiv">
-                {pieChartData.map(function(name, index){
-                    return <div key={ index }><span className="resultCat">{name.title}</span>: {name.value}</div>;
-                  })}
-                </div>
+    return (
+        <div>
+            <div className="resultTitle">Results</div>
+            <PieChart className="pieChart"
+                data={ pieChartData }
+                animate
+                lengthAngle={-360}
+                label={({ data, dataIndex }) =>
+                    Math.round(data[dataIndex].percentage) + '%'
+                }
+                radius={42}
+                labelPosition={112}
+                labelStyle={{
+                    fontSize: '5px',
+                    fontFamily: 'sans-serif',
+                    fill: '#121212'
+                }}
+            />
+            <div className="resultDiv">
+            {pieChartData.map(function(name, index){
+                return <div key={ index }><span className="resultCat">{name.title}</span>: {name.value}</div>;
+                })}
             </div>
-        )
-    }
+        </div>
+    )
 }
 
 export default Result
